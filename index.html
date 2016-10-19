@@ -1,0 +1,60 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $("#ajax-button").click(function(){
+          $.ajax({
+            url: "/.json",
+            success: function(result){
+              alert(result.data);
+            }
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+      <button id="ajax-button">Ajax button</button>
+      <form action="" method="post">{% csrf_token %}
+        <label for="name">Название: </label>
+        <input id="name" type="text" name="name" value="">
+        <label for="capacity">Вместительность: </label>
+        <input id="capacity" type="text" name="capacity" value="">
+        <label for="address">Адрес: </label>
+        <input id="address" type="text" name="address" value="">
+        <label for="latitude">Широта: </label>
+        <input id="latitude" type="text" name="latitude" value="">
+        <label for="longitude">Долгота: </label>
+        <input id="longitude" type="text" name="longitude" value="">
+        <input type="submit" value="OK" onclick="">
+      </form>
+
+      <div>
+        <table style="width:100%">
+        <tr>
+          <th>Название</th>
+          <th>Вместительность</th>
+          <th>Адрес</th>
+          <th>Широта</th>
+          <th>Долгота</th>
+        </tr>
+        {% for bar in bars %}
+        <tr>
+          <td>{{ bar.name }}</td>
+          <td>{{ bar.capacity }}</td>
+          <td>{{ bar.address }}</td>
+          <td>{{ bar.latitude }}</td>
+          <td>{{ bar.longitude }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
